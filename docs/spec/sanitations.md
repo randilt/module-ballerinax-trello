@@ -23,8 +23,8 @@ These changes are done in order to improve the overall usability, and as workaro
 }
 ```
 
-2.
-3.
+2. Updated 'operationId' of put methods in '/members/{id}/notificationsChannelSettings/{channel}' and '/members/{id}/notificationsChannelSettings/{channel}/{blockedKeys}' for uniqueness.
+3. Added missing path parameter definition in '/cards/{idCard}/customFields'
 
 ## OpenAPI cli command
 
