@@ -12739,7 +12739,7 @@
         "tags": [],
         "summary": "Update blocked notification keys of Member on a channel",
         "description": "Update blocked notification keys of Member on a specific channel",
-        "operationId": "put-members-id-notificationChannelSettings-channel-blockedKeys",
+        "operationId": "updateMemberNotificationChannelSettings",
         "requestBody": {
           "required": true,
           "content": {
@@ -12823,7 +12823,7 @@
         "tags": [],
         "summary": "Update blocked notification keys of Member on a channel",
         "description": "Update blocked notification keys of Member on a specific channel",
-        "operationId": "put-members-id-notificationChannelSettings-channel-blockedKeys",
+        "operationId": "updateMemberNotificationChannelSettingsWithKeys",
         "deprecated": false,
         "responses": {
           "200": {
