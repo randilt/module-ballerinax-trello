@@ -7275,6 +7275,17 @@
       }
     },
     "/cards/{idCard}/customFields": {
+      "parameters": [
+        {
+          "name": "idCard",
+          "in": "path",
+          "required": true,
+          "description": "The ID of the card",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
       "put": {
         "tags": [],
         "summary": "Update Multiple Custom Field items on Card",
