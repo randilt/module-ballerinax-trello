@@ -11,7 +11,18 @@ These changes are done in order to improve the overall usability, and as workaro
 
 [//]: # "TODO: Add sanitation details"
 
-1.
+1.  Added missing 'items' property to the Notification schema's reactions field to specify array content type:
+
+```json
+"reactions": {
+  "type": "array",
+  "items": {
+    "type": "object"
+  },
+  "example": []
+}
+```
+
 2.
 3.
 
