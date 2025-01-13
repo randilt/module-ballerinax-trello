@@ -145,7 +145,7 @@ public type idCard_customFields_body record {
 # Represents the Queries record for the operation: get-checklists-id-checkitems-idcheckitem
 public type GetChecklistsIdCheckitemsIdcheckitemQueries record {
     # One of: `all`, `name`, `nameData`, `pos`, `state`, `type`, `due`, `dueReminder`, `idMember`,.
-    "all"|"name"|"nameData"|"pos"|"state"|"type"|"due"|"dueReminder"|"idMember" fields = "name, nameData, pos, state, due, dueReminder, idMember";
+    "all"|"name"|"nameData"|"pos"|"state"|"type"|"due"|"dueReminder"|"idMember" fields = <"all"|"name"|"nameData"|"pos"|"state"|"type"|"due"|"dueReminder"|"idMember">"name, nameData, pos, state, due, dueReminder, idMember";
 };
 
 public type cardsidCardcustomFields_customFieldItems record {
@@ -435,9 +435,9 @@ public type Notification record {
 public type GetEnterprisesIdSignupurlQueries record {
     # Designates whether the user has seen/consented to the Trello ToS prior to being redirected to the enterprise signup page/their IdP.
     boolean tosAccepted = false;
-    # 
+    #
     boolean authenticate = false;
-    # 
+    #
     boolean confirmationAccepted = false;
     # Any valid URL.
     string? returnUrl?;
@@ -448,7 +448,7 @@ public type GetChecklistsIdCheckitemsQueries record {
     # One of: `all`, `none`.
     "all"|"none" filter = "all";
     # One of: `all`, `name`, `nameData`, `pos`, `state`,`type`, `due`, `dueReminder`, `idMember`.
-    "all"|"name"|"nameData"|"pos"|"state"|"type"|"due"|"dueReminder"|"idMember" fields = "name, nameData, pos, state, due, dueReminder, idMember";
+    "all"|"name"|"nameData"|"pos"|"state"|"type"|"due"|"dueReminder"|"idMember" fields = <"all"|"name"|"nameData"|"pos"|"state"|"type"|"due"|"dueReminder"|"idMember">"name, nameData, pos, state, due, dueReminder, idMember";
 };
 
 # An object containing the key and value to set for the card's Custom Field value. The key used to set the value should match the type of Custom Field defined. This is optional if Custom Field is list type.
@@ -477,9 +477,9 @@ public type TokenFields "identifier"|"idMember"|"dateCreated"|"dateExpires"|"per
 
 # Represents the Queries record for the operation: get-search-members
 public type GetSearchMembersQueries record {
-    # 
+    #
     TrelloID idBoard?;
-    # 
+    #
     boolean onlyOrgMembers = false;
     # Search query 1 to 16384 characters long
     @constraint:String {maxLength: 16394, minLength: 1}
@@ -487,7 +487,7 @@ public type GetSearchMembersQueries record {
     # The maximum number of results to return. Maximum of 20.
     @constraint:Int {maxValue: 20}
     int:Signed32 'limit = 8;
-    # 
+    #
     TrelloID idOrganization?;
 };
 
@@ -600,14 +600,14 @@ public type ActionFields "id"|"idMemberCreator"|"data"|"type"|"date"|"limits"|"d
 
 # Represents the Queries record for the operation: get-members=id
 public type GetMembersIdQueries record {
-    # 
+    #
     boolean savedSearches = false;
     # One of: `all`, `custom`, `default`, `none`, `premium`
     "all"|"custom"|"default"|"none"|"premium" boardBackgrounds = "none";
     # See the [Cards Nested Resource](/cloud/trello/guides/rest-api/nested-resources/#cards-nested-resource) for additional options
     string cards = "none";
     # Whether or not to include paid account information in the returned member object
-    # 
+    #
     # # Deprecated
     @deprecated
     boolean paid_account = false;
@@ -718,21 +718,21 @@ public type PutCardsIdQueries record {
     # Comma-separated list of member IDs
     TrelloID idMembers?;
     # Updates the card's cover
-    #  | Option | Values | About |
-    #  |--------|--------|-------|
-    #  | color | `pink`, `yellow`, `lime`, `blue`, `black`, `orange`, `red`, `purple`, `sky`, `green` | Makes the cover a solid color . |
-    #  | brightness | `dark`, `light` | Determines whether the text on the cover should be dark or light.
-    #  | url | An unsplash URL: https://images.unsplash.com | Used if making an image the cover. Only Unsplash URLs work.
-    #  | idAttachment | ID of an attachment on the card | Used if setting an attached image as the cover. |
-    #  | size | `normal`, `full` | Determines whether to show the card name on the cover, or below it. |
-    #  
-    #  `brightness` can be sent alongside any of the other parameters, but all of the other parameters are mutually exclusive; you can not have the cover be a `color` and an `idAttachment` at the same time. 
-    #  
-    #  On the brightness options, setting it to light will make the text on the card cover dark:
-    #  ![](/cloud/trello/images/rest/cards/cover-brightness-dark.png)
-    #  
-    #  And vice versa, setting it to dark will make the text on the card cover light: 
-    #  ![](/cloud/trello/images/rest/cards/cover-brightness-light.png) 
+    # | Option | Values | About |
+    # |--------|--------|-------|
+    # | color | `pink`, `yellow`, `lime`, `blue`, `black`, `orange`, `red`, `purple`, `sky`, `green` | Makes the cover a solid color . |
+    # | brightness | `dark`, `light` | Determines whether the text on the cover should be dark or light.
+    # | url | An unsplash URL: https://images.unsplash.com | Used if making an image the cover. Only Unsplash URLs work.
+    # | idAttachment | ID of an attachment on the card | Used if setting an attached image as the cover. |
+    # | size | `normal`, `full` | Determines whether to show the card name on the cover, or below it. |
+    #
+    # `brightness` can be sent alongside any of the other parameters, but all of the other parameters are mutually exclusive; you can not have the cover be a `color` and an `idAttachment` at the same time. 
+    #
+    # On the brightness options, setting it to light will make the text on the card cover dark:
+    # ![](/cloud/trello/images/rest/cards/cover-brightness-dark.png)
+    #
+    # And vice versa, setting it to dark will make the text on the card cover light: 
+    # ![](/cloud/trello/images/rest/cards/cover-brightness-light.png) 
     cover cover?;
     # Whether the member is should be subscribed to the card
     boolean subscribed?;
@@ -778,13 +778,13 @@ public type GetEnterprisesIdClaimableorganizationsQueries record {
 
 # Represents the Queries record for the operation: membersidavatar
 public type MembersidavatarQueries record {
-    # 
+    #
     record {byte[] fileContent; string fileName;} file;
 };
 
 # Represents the Queries record for the operation: post-members-id-customstickers
 public type PostMembersIdCustomstickersQueries record {
-    # 
+    #
     record {byte[] fileContent; string fileName;} file;
 };
 
@@ -879,7 +879,7 @@ public type GetCardsIdQueries record {
     string sticker_fields = "all";
     # See the [Lists Nested Resource](/cloud/trello/guides/rest-api/nested-resources/)
     boolean list = false;
-    # 
+    #
     boolean checkItemStates = false;
     # `all` or a comma-separated list of board [fields](/cloud/trello/guides/rest-api/object-definitions/#board-object). **Defaults**: `name, desc, descData, closed, idOrganization, pinned, url, prefs`
     string board_fields?;
@@ -926,7 +926,7 @@ public type GetChecklistsIdQueries record {
     # Valid values: `all`, `closed`, `none`, `open`, `visible`. Cards is a nested resource. The additional query params available are documented at [Cards Nested Resource](/cloud/trello/guides/rest-api/nested-resources/#cards-nested-resource).
     "all"|"closed"|"none"|"open"|"visible" cards = "none";
     # The fields on the checkItem to return if checkItems are being returned. `all` or a comma-separated list of: `name`, `nameData`, `pos`, `state`, `type`, `due`, `dueReminder`, `idMember`
-    "all"|"name"|"nameData"|"pos"|"state"|"type"|"due"|"dueReminder"|"idMember" checkItem_fields = "name, nameData, pos, state, due, dueReminder, idMember";
+    "all"|"name"|"nameData"|"pos"|"state"|"type"|"due"|"dueReminder"|"idMember" checkItem_fields = <"all"|"name"|"nameData"|"pos"|"state"|"type"|"due"|"dueReminder"|"idMember">"name, nameData, pos, state, due, dueReminder, idMember";
     # The check items on the list to return. One of: `all`, `none`.
     "all"|"none" checkItems = "all";
     # `all` or a comma-separated list of checklist [fields](/cloud/trello/guides/rest-api/object-definitions/)
@@ -1276,7 +1276,7 @@ public type PostCardsQueries record {
     string coordinates?;
     # A URL starting with `http://` or `https://`. The URL will be attached to the card upon creation.
     string urlSource?;
-    # 
+    #
     record {byte[] fileContent; string fileName;} fileSource?;
     # The ID of the list the card should be created in
     TrelloID idList;
@@ -1337,7 +1337,7 @@ public type GetCardsIdChecklistsQueries record {
     # `all` or `none`
     "all"|"none" filter = "all";
     # `all` or a comma-separated list of: `name,nameData,pos,state,type,due,dueReminder,idMember`
-    "name"|"nameData"|"pos"|"state"|"type"|"due"|"dueReminder"|"idMember" checkItem_fields = "name,nameData,pos,state,due,dueReminder,idMember";
+    "name"|"nameData"|"pos"|"state"|"type"|"due"|"dueReminder"|"idMember" checkItem_fields = <"name"|"nameData"|"pos"|"state"|"type"|"due"|"dueReminder"|"idMember">"name,nameData,pos,state,due,dueReminder,idMember";
     # `all` or `none`
     "all"|"none" checkItems = "all";
     # `all` or a comma-separated list of: `idBoard,idCard,name,pos`
@@ -1397,17 +1397,17 @@ public type Enterprise_prefs_signup record {
 
 # Represents the Queries record for the operation: get-members-id-notifications
 public type GetMembersIdNotificationsQueries record {
-    # 
+    #
     string filter = "all";
-    # 
+    #
     boolean entities = false;
     # A notification ID
     string before?;
-    # 
+    #
     boolean display = false;
     # Max 1000
     int:Signed32 'limit?;
-    # 
+    #
     boolean memberCreator = true;
     # Max 100
     int:Signed32 page?;
@@ -1810,20 +1810,20 @@ public type GetUsersIdQueries record {
 # Represents the Queries record for the operation: put-boards-id-memberships-idmembership
 public type PutBoardsIdMembershipsIdmembershipQueries record {
     # Valid values: all, avatarHash, bio, bioData, confirmed, fullName, idPremOrgsAdmin, initials, memberType, products, status, url, username
-    "all"|"avatarHash"|"bio"|"bioData"|"confirmed"|"fullName"|"idPremOrgsAdmin"|"initials"|"memberType"|"products"|"status"|"url"|"username" member_fields = "fullName, username";
+    "all"|"avatarHash"|"bio"|"bioData"|"confirmed"|"fullName"|"idPremOrgsAdmin"|"initials"|"memberType"|"products"|"status"|"url"|"username" member_fields = <"all"|"avatarHash"|"bio"|"bioData"|"confirmed"|"fullName"|"idPremOrgsAdmin"|"initials"|"memberType"|"products"|"status"|"url"|"username">"fullName, username";
     # One of: admin, normal, observer. Determines the type of member that this membership will be to this board.
     "admin"|"normal"|"observer" 'type;
 };
 
 # Represents the Queries record for the operation: get-actions-id
 public type GetActionsIdQueries record {
-    # 
+    #
     boolean entities = false;
     # `all` or a comma-separated list of member [fields](/cloud/trello/guides/rest-api/object-definitions/)
     string member_fields = "avatarHash,fullName,initials,username";
-    # 
+    #
     boolean display = true;
-    # 
+    #
     boolean member = true;
     # Whether to include the member object for the creator of the action
     boolean memberCreator = true;
@@ -1883,15 +1883,15 @@ public type PutMembersIdQueries record {
     # New initials for the member. 1-4 characters long.
     @constraint:String {maxLength: 4, minLength: 1}
     string initials?;
-    # 
+    #
     string prefs\/locale?;
     # New name for the member. Cannot begin or end with a space.
     string fullName?;
-    # 
+    #
     string bio?;
     # One of: `gravatar`, `none`, `upload`
     "gravatar"|"none"|"upload" avatarSource?;
-    # 
+    #
     boolean prefs\/colorBlind?;
     # `-1` for disabled, `1`, or `60`
     int:Signed32 prefs\/minutesBetweenSummaries?;
@@ -1973,13 +1973,13 @@ public type PostWebhooksQueries record {
 
 # Represents the Queries record for the operation: put-organizations-id-members-idmember-deactivated
 public type PutOrganizationsIdMembersIdmemberDeactivatedQueries record {
-    # 
+    #
     boolean value;
 };
 
 # Represents the Queries record for the operation: post-members-id-boardbackgrounds-1
 public type PostMembersIdBoardbackgrounds1Queries record {
-    # 
+    #
     record {byte[] fileContent; string fileName;} file;
 };
 
@@ -2051,7 +2051,7 @@ public type EnterpriseAdmin record {
 
 # Represents the Queries record for the operation: membersidcustomboardbackgrounds-1
 public type Membersidcustomboardbackgrounds1Queries record {
-    # 
+    #
     record {byte[] fileContent; string fileName;} file;
 };
 
@@ -2101,7 +2101,7 @@ public type idBoards "mine"|TrelloID;
 
 # Represents the Queries record for the operation: put-notifications-id-unread
 public type PutNotificationsIdUnreadQueries record {
-    # 
+    #
     string value?;
 };
 
@@ -2128,7 +2128,7 @@ public type Emoji_trello record {
 
 # Represents the Queries record for the operation: post-members-id-customemoji
 public type PostMembersIdCustomemojiQueries record {
-    # 
+    #
     record {byte[] fileContent; string fileName;} file;
     # Name for the emoji. 2 - 64 characters
     @constraint:String {maxLength: 64, minLength: 2}
@@ -2351,7 +2351,7 @@ public type PutNotificationsIdQueries record {
     boolean unread?;
 };
 
-# 
+#
 public type Memberships record {
     TrelloID id?;
 };
@@ -2410,7 +2410,7 @@ public type GetBoardsIdQueries record {
     boolean organization_pluginData = false;
     # Determines whether the pluginData for this board should be returned. Valid values: true or false.
     boolean pluginData = false;
-    # 
+    #
     boolean myPrefs = false;
     # The fields of the board to be included in the response. Valid values: all or a comma-separated list of: closed, dateLastActivity, dateLastView, desc, descData, idMemberCreator, idOrganization, invitations, invited, labelNames, memberships, name, pinned, powerUps, prefs, shortLink, shortUrl, starred, subscribed, url
     string fields = "name,desc,descData,closed,idOrganization,pinned,url,shortUrl,prefs,labelNames";
@@ -2578,7 +2578,7 @@ public type GetBoardsIdActionsQueries record {
 # Represents the Queries record for the operation: get-cards-id-attachments-idattachment
 public type GetCardsIdAttachmentsIdattachmentQueries record {
     # The Attachment fields to be included in the response.
-    (AttachmentFields)[] fields = ["all"];
+    (AttachmentFields)[] fields = [<AttachmentFields>"all"];
 };
 
 # Represents the Queries record for the operation: get-organizations-id-boards
@@ -2590,7 +2590,7 @@ public type GetOrganizationsIdBoardsQueries record {
 };
 
 # An object containing information regarding the card's cover 
-#  `brightness` can be sent alongside any of the other parameters, but all of the other parameters are mutually exclusive; you can not have the cover be a color and an `idAttachment` at the same time.
+# `brightness` can be sent alongside any of the other parameters, but all of the other parameters are mutually exclusive; you can not have the cover be a color and an `idAttachment` at the same time.
 public type cardsid_value record {
     # One of: `pink, yellow, lime, blue, black, orange, red, purple, sky, green`
     "pink"|"yellow"|"lime"|"blue"|"black"|"orange"|"red"|"purple"|"sky"|"green" color?;
