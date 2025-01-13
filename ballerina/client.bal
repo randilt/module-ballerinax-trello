@@ -3288,6 +3288,23 @@ public isolated client class Client {
         return self.clientEp->put(resourcePath, request, headers);
     }
 
+    # Update Multiple Custom Field items on Card
+    #
+    # + idCard - The ID of the Card
+    # + headers - Headers to be sent with the request 
+    # + return - Success 
+    resource isolated function put cards/[TrelloID idCard]/customFields(idCard_customFields_body payload, map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/cards/${getEncodedUri(idCard)}/customFields`;
+        map<anydata> queryParam = {};
+        queryParam["key"] = self.apiKeyConfig.'key;
+        queryParam["token"] = self.apiKeyConfig.token;
+        resourcePath = resourcePath + check getPathForQueryParam(queryParam);
+        http:Request request = new;
+        json jsonBody = payload.toJson();
+        request.setPayload(jsonBody, "application/json");
+        return self.clientEp->put(resourcePath, request, headers);
+    }
+
     # Update a Card
     #
     # + id - The ID of the Card
@@ -3354,23 +3371,6 @@ public isolated client class Client {
         queryParam["token"] = self.apiKeyConfig.token;
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
         http:Request request = new;
-        return self.clientEp->put(resourcePath, request, headers);
-    }
-
-    # Update Multiple Custom Field items on Card
-    #
-    # + idCard - The ID of the card
-    # + headers - Headers to be sent with the request 
-    # + return - Success 
-    resource isolated function put cards/[string idCard]/customFields(idCard_customFields_body payload, map<string|string[]> headers = {}) returns error? {
-        string resourcePath = string `/cards/${getEncodedUri(idCard)}/customFields`;
-        map<anydata> queryParam = {};
-        queryParam["key"] = self.apiKeyConfig.'key;
-        queryParam["token"] = self.apiKeyConfig.token;
-        resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        http:Request request = new;
-        json jsonBody = payload.toJson();
-        request.setPayload(jsonBody, "application/json");
         return self.clientEp->put(resourcePath, request, headers);
     }
 

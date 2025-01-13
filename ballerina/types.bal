@@ -56,7 +56,7 @@ public type GetMembersIdTokensQueries record {
 };
 
 public type Prefs record {
-    "org"|"board"|"public" permissionLevel?;
+    "org"|"board" permissionLevel?;
     boolean hideVotes?;
     "disabled"|"enabled" voting?;
     string comments?;
@@ -66,9 +66,9 @@ public type Prefs record {
     boolean isTemplate?;
     CardAging cardAging?;
     boolean calendarFeedEnabled?;
-    string? background?;
-    string? backgroundImage?;
-    ImageDescriptor[]? backgroundImageScaled?;
+    TrelloID background?;
+    string backgroundImage?;
+    ImageDescriptor[] backgroundImageScaled?;
     boolean backgroundTile?;
     string backgroundBrightness?;
     string backgroundBottomColor?;
@@ -1531,10 +1531,10 @@ public type Board record {
     # The name of the board.
     string name?;
     string desc?;
-    string? descData?;
+    string descData?;
     boolean closed?;
-    string? idMemberCreator?;
-    string? idOrganization?;
+    TrelloID idMemberCreator?;
+    TrelloID idOrganization?;
     boolean pinned?;
     string url?;
     string shortUrl?;
@@ -2172,8 +2172,8 @@ public type Member record {
     string fullName?;
     TrelloID idEnterprise?;
     string[] idEnterprisesDeactivated?;
-    string? idMemberReferrer?;
-    string[] idPremOrgsAdmin?;
+    TrelloID idMemberReferrer?;
+    TrelloID[] idPremOrgsAdmin?;
     string initials?;
     "normal"|"ghost" memberType?;
     Member_nonPublic nonPublic?;
@@ -2190,8 +2190,8 @@ public type Member record {
     string email?;
     string gravatarHash?;
     TrelloID[] idBoards?;
-    string[] idOrganizations?;
-    string[] idEnterprisesAdmin?;
+    TrelloID[] idOrganizations?;
+    TrelloID[] idEnterprisesAdmin?;
     LimitsObject limits?;
     ("password"|"saml")[] loginTypes?;
     Member_marketingOptIn marketingOptIn?;
