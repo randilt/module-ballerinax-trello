@@ -445,17 +445,22 @@
             "example": "Track changes to Trello's Platform on this board."
           },
           "descData": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "closed": {
             "type": "boolean",
             "example": false
           },
           "idMemberCreator": {
-            "$ref": "#/components/schemas/TrelloID"
+            "type": "string",
+            "nullable": true,
+            "example": null
           },
           "idOrganization": {
-            "$ref": "#/components/schemas/TrelloID"
+            "type": "string",
+            "nullable": true,
+            "example": null
           },
           "pinned": {
             "type": "boolean",
@@ -1574,6 +1579,12 @@
         "pattern": "^[0-9a-fA-F]{24}$",
         "example": "5abbe4b7ddc1b351ef961414"
       },
+      "TrelloIDNullable": {
+        "type": "string",
+        "nullable": true,
+        "pattern": "^[0-9a-fA-F]{24}$",
+        "example": "5abbe4b7ddc1b351ef961414"
+      },
       "ViewFilter": {
         "type": "string",
         "enum": ["all", "closed", "none", "open"]
@@ -1831,14 +1842,16 @@
             }
           },
           "idMemberReferrer": {
-            "$ref": "#/components/schemas/TrelloID",
+            "type": "string",
             "nullable": true,
             "example": null
           },
           "idPremOrgsAdmin": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TrelloID"
+              "type": "string",
+              "nullable": true,
+              "example": null
             }
           },
           "initials": {
@@ -1937,13 +1950,17 @@
           "idOrganizations": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TrelloID"
+              "type": "string",
+              "nullable": true,
+              "example": null
             }
           },
           "idEnterprisesAdmin": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TrelloID"
+              "type": "string",
+              "nullable": true,
+              "example": null
             }
           },
           "limits": {
@@ -2415,7 +2432,7 @@
         "properties": {
           "permissionLevel": {
             "type": "string",
-            "enum": ["org", "board"]
+            "enum": ["org", "board", "public"]
           },
           "hideVotes": {
             "type": "boolean"
@@ -2446,14 +2463,18 @@
             "type": "boolean"
           },
           "background": {
-            "$ref": "#/components/schemas/TrelloID"
+            "type": "string",
+            "nullable": true,
+            "example": null
           },
           "backgroundImage": {
             "type": "string",
+            "nullable": true,
             "format": "uri"
           },
           "backgroundImageScaled": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/ImageDescriptor"
             }
