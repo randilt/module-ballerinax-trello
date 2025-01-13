@@ -1391,7 +1391,7 @@ public type GetMembersIdNotificationsQueries record {
 };
 
 public type Card_cover record {
-    TrelloID idAttachment?;
+    string? idAttachment?;
     Color? color?;
     boolean? idUploadedBackground?;
     "normal" size?;
@@ -1642,7 +1642,7 @@ public type Card record {
     string desc?;
     Card_descData descData?;
     string? due?;
-    string? dueReminder?;
+    int? dueReminder?;
     TrelloID idBoard?;
     (Checklist|TrelloID)[] idChecklists?;
     (Label|TrelloID)[] idLabels?;
@@ -1650,8 +1650,8 @@ public type Card record {
     (TrelloID)[] idMembers?;
     (TrelloID)[] idMembersVoted?;
     int idShort?;
-    TrelloID idAttachmentCover?;
-    (TrelloID)[] labels?;
+    string? idAttachmentCover?;
+    (string|record {string id?;})[] labels?;
     Limits limits?;
     string? locationName?;
     boolean manualCoverAttachment?;
@@ -1659,7 +1659,7 @@ public type Card record {
     float pos?;
     string shortLink?;
     string shortUrl?;
-    boolean subscribed?;
+    boolean? subscribed?;
     string url?;
     Card_cover cover?;
 };

@@ -525,8 +525,15 @@
           "labels": {
             "type": "array",
             "items": {
-              "type": "string",
-              "$ref": "#/components/schemas/TrelloID"
+              "oneOf": [
+                { "type": "string" },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" }
+                  }
+                }
+              ]
             }
           },
           "limits": { "type": "object", "$ref": "#/components/schemas/Limits" },
@@ -543,7 +550,7 @@
           "subscribed": {
             "type": "boolean",
             "example": false,
-            "nullable": false
+            "nullable": true
           },
           "url": {
             "type": "string",

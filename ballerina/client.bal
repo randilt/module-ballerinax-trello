@@ -6,14 +6,13 @@ import ballerina/http;
 public isolated client class Client {
     final http:Client clientEp;
     final readonly & ApiKeysConfig apiKeyConfig;
-
     # Gets invoked to initialize the `connector`.
     #
     # + apiKeyConfig - API keys for authorization 
     # + config - The configurations to be used when initializing the `connector` 
     # + serviceUrl - URL of the target service 
     # + return - An error if connector initialization failed 
-    public isolated function init(ApiKeysConfig apiKeyConfig, ConnectionConfig config = {}, string serviceUrl = "https://api.trello.com/1") returns error? {
+    public isolated function init(ApiKeysConfig apiKeyConfig, ConnectionConfig config =  {}, string serviceUrl = "https://api.trello.com/1") returns error? {
         http:ClientConfiguration httpClientConfig = {httpVersion: config.httpVersion, timeout: config.timeout, forwarded: config.forwarded, poolConfig: config.poolConfig, compression: config.compression, circuitBreaker: config.circuitBreaker, retryConfig: config.retryConfig, validation: config.validation};
         do {
             if config.http1Settings is ClientHttp1Settings {
@@ -77,7 +76,7 @@ public isolated client class Client {
     # + idPlugin - The ID of the Power-Up to disable
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    #
+    # 
     # # Deprecated
     @deprecated
     resource isolated function delete boards/[TrelloID id]/boardPlugins/[TrelloID idPlugin](map<string|string[]> headers = {}) returns error? {
@@ -2398,7 +2397,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    #
+    # 
     # # Deprecated
     @deprecated
     resource isolated function post boards/[TrelloID id]/boardPlugins(map<string|string[]> headers = {}, *PostBoardsIdBoardpluginsQueries queries) returns error? {
