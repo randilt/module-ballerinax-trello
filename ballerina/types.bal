@@ -56,28 +56,6 @@ public type GetMembersIdTokensQueries record {
 };
 
 public type Prefs record {
-    "org"|"board" permissionLevel?;
-    boolean hideVotes?;
-    "disabled"|"enabled" voting?;
-    string comments?;
-    "admins"|"members" invitations?;
-    boolean selfJoin?;
-    boolean cardCovers?;
-    boolean isTemplate?;
-    CardAging cardAging?;
-    boolean calendarFeedEnabled?;
-    TrelloID background?;
-    string backgroundImage?;
-    ImageDescriptor[] backgroundImageScaled?;
-    boolean backgroundTile?;
-    string backgroundBrightness?;
-    string backgroundBottomColor?;
-    string backgroundTopColor?;
-    boolean canBePublic?;
-    boolean canBeEnterprise?;
-    boolean canBeOrg?;
-    boolean canBePrivate?;
-    boolean canInvite?;
 };
 
 # Represents the Queries record for the operation: put-actions-id-text
@@ -947,15 +925,6 @@ public type EnterpriseAuditLog_organization_enterpriseJoinRequest record {
     string date?;
 };
 
-public type ImageDescriptor record {
-    # The width of the image.
-    int width?;
-    # The height of the image.
-    int height?;
-    # The URL of the image.
-    string url?;
-};
-
 # Represents the Queries record for the operation: post-organizations-id-exports
 public type PostOrganizationsIdExportsQueries record {
     # Whether the CSV should include attachments or not.
@@ -1531,10 +1500,10 @@ public type Board record {
     # The name of the board.
     string name?;
     string desc?;
-    string descData?;
+    string? descData?;
     boolean closed?;
-    TrelloID idMemberCreator?;
-    TrelloID idOrganization?;
+    string idMemberCreator?;
+    string idOrganization?;
     boolean pinned?;
     string url?;
     string shortUrl?;
@@ -2135,8 +2104,6 @@ public type PostMembersIdCustomemojiQueries record {
     string name;
 };
 
-public type CardAging "pirate"|"regular";
-
 # Represents the Queries record for the operation: put-checlists-id
 public type PutCheclistsIdQueries record {
     # Determines the position of the checklist on the card. One of: `top`, `bottom`, or a positive number.
@@ -2227,9 +2194,11 @@ public type PutBoardsIdMyprefsShowsidebarmembersQueries record {
     boolean value;
 };
 
-public type inline_response_200_5 TrelloList;
+public type inline_response_200_9 Tag;
 
-public type inline_response_200_6 Organization;
+public type inline_response_200_5 Card;
+
+public type inline_response_200_6 TrelloList;
 
 public type ClaimableOrganizations_organizations record {
     string name?;
@@ -2243,11 +2212,11 @@ public type ClaimableOrganizations_organizations record {
     string? dateLastActive?;
 };
 
-public type inline_response_200_7 Memberships;
+public type inline_response_200_7 Organization;
 
 public type Channel "email";
 
-public type inline_response_200_8 Tag;
+public type inline_response_200_8 Memberships;
 
 public type BoardBackground record {
     TrelloID id?;
@@ -2323,9 +2292,11 @@ public type Member_messagesDismissed record {
     TrelloID _id?;
 };
 
-public type inline_response_200_1 Member;
+public type inline_response_200_1 record {
+    string signupUrl?;
+};
 
-public type inline_response_200_2 Notification;
+public type inline_response_200_2 Member;
 
 public type idCustomField_item_body record {cardsidCardcustomFieldidCustomFielditem_value value?;}|record {TrelloID idValue?;};
 
@@ -2335,9 +2306,9 @@ public type PostOrganizationsIdLogoQueries record {
     record {byte[] fileContent; string fileName;} file?;
 };
 
-public type inline_response_200_3 Board;
+public type inline_response_200_3 Notification;
 
-public type inline_response_200_4 Card;
+public type inline_response_200_4 Board;
 
 # Represents the Queries record for the operation: get-cards-id-checkitem-idcheckitem
 public type GetCardsIdCheckitemIdcheckitemQueries record {
@@ -2519,7 +2490,11 @@ public type GetTokensTokenMemberQueries record {
 };
 
 public type inline_response_200 record {
-    string signupUrl?;
+    TrelloID id?;
+    TrelloID idMember?;
+    TrelloID idAction?;
+    string emoji?;
+    Member member?;
 };
 
 public type Emoji record {

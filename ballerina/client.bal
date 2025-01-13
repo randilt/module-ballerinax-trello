@@ -6,13 +6,14 @@ import ballerina/http;
 public isolated client class Client {
     final http:Client clientEp;
     final readonly & ApiKeysConfig apiKeyConfig;
+
     # Gets invoked to initialize the `connector`.
     #
     # + apiKeyConfig - API keys for authorization 
     # + config - The configurations to be used when initializing the `connector` 
     # + serviceUrl - URL of the target service 
     # + return - An error if connector initialization failed 
-    public isolated function init(ApiKeysConfig apiKeyConfig, ConnectionConfig config =  {}, string serviceUrl = "https://api.trello.com/1") returns error? {
+    public isolated function init(ApiKeysConfig apiKeyConfig, ConnectionConfig config = {}, string serviceUrl = "https://api.trello.com/1") returns error? {
         http:ClientConfiguration httpClientConfig = {httpVersion: config.httpVersion, timeout: config.timeout, forwarded: config.forwarded, poolConfig: config.poolConfig, compression: config.compression, circuitBreaker: config.circuitBreaker, retryConfig: config.retryConfig, validation: config.validation};
         do {
             if config.http1Settings is ClientHttp1Settings {
@@ -76,7 +77,7 @@ public isolated client class Client {
     # + idPlugin - The ID of the Power-Up to disable
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    # 
+    #
     # # Deprecated
     @deprecated
     resource isolated function delete boards/[TrelloID id]/boardPlugins/[TrelloID idPlugin](map<string|string[]> headers = {}) returns error? {
@@ -603,7 +604,7 @@ public isolated client class Client {
     # + idAction - The ID of the action
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    resource isolated function get actions/[TrelloID idAction]/reactionsSummary(map<string|string[]> headers = {}) returns error? {
+    resource isolated function get actions/[TrelloID idAction]/reactionsSummary(map<string|string[]> headers = {}) returns record {}|error {
         string resourcePath = string `/actions/${getEncodedUri(idAction)}/reactionsSummary`;
         map<anydata> queryParam = {};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -618,7 +619,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function get actions/[TrelloID id](map<string|string[]> headers = {}, *GetActionsIdQueries queries) returns error? {
+    resource isolated function get actions/[TrelloID id](map<string|string[]> headers = {}, *GetActionsIdQueries queries) returns Action|error {
         string resourcePath = string `/actions/${getEncodedUri(id)}`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -1494,7 +1495,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function get enterprises/[TrelloID id]/signupUrl(map<string|string[]> headers = {}, *GetEnterprisesIdSignupurlQueries queries) returns inline_response_200|error {
+    resource isolated function get enterprises/[TrelloID id]/signupUrl(map<string|string[]> headers = {}, *GetEnterprisesIdSignupurlQueries queries) returns inline_response_200_1|error {
         string resourcePath = string `/enterprises/${getEncodedUri(id)}/signupUrl`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -1598,7 +1599,7 @@ public isolated client class Client {
     # + 'field - One of the member [fields](/cloud/trello/guides/rest-api/object-definitions/)
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    resource isolated function get members/[TrelloID id]/[MemberFields 'field](map<string|string[]> headers = {}) returns inline_response_200_1|error {
+    resource isolated function get members/[TrelloID id]/[MemberFields 'field](map<string|string[]> headers = {}) returns inline_response_200_2|error {
         string resourcePath = string `/members/${getEncodedUri(id)}/${getEncodedUri('field)}`;
         map<anydata> queryParam = {};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -1925,7 +1926,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function get members/[id id](map<string|string[]> headers = {}, *GetMembersIdQueries queries) returns inline_response_200_1|error {
+    resource isolated function get members/[id id](map<string|string[]> headers = {}, *GetMembersIdQueries queries) returns inline_response_200_2|error {
         string resourcePath = string `/members/${getEncodedUri(id)}`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -1955,7 +1956,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function get notifications/[TrelloID id](map<string|string[]> headers = {}, *GetNotificationsIdQueries queries) returns inline_response_200_2|error {
+    resource isolated function get notifications/[TrelloID id](map<string|string[]> headers = {}, *GetNotificationsIdQueries queries) returns inline_response_200_3|error {
         string resourcePath = string `/notifications/${getEncodedUri(id)}`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -1970,7 +1971,7 @@ public isolated client class Client {
     # + 'field - A notification [field](/cloud/trello/guides/rest-api/object-definitions/)
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    resource isolated function get notifications/[TrelloID id]/[NotificationFields 'field](map<string|string[]> headers = {}) returns inline_response_200_2|error {
+    resource isolated function get notifications/[TrelloID id]/[NotificationFields 'field](map<string|string[]> headers = {}) returns inline_response_200_3|error {
         string resourcePath = string `/notifications/${getEncodedUri(id)}/${getEncodedUri('field)}`;
         map<anydata> queryParam = {};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -1985,7 +1986,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function get notifications/[TrelloID id]/board(map<string|string[]> headers = {}, *GetNotificationsIdBoardQueries queries) returns inline_response_200_3|error {
+    resource isolated function get notifications/[TrelloID id]/board(map<string|string[]> headers = {}, *GetNotificationsIdBoardQueries queries) returns inline_response_200_4|error {
         string resourcePath = string `/notifications/${getEncodedUri(id)}/board`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -2000,7 +2001,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function get notifications/[TrelloID id]/card(map<string|string[]> headers = {}, *GetNotificationsIdCardQueries queries) returns inline_response_200_4|error {
+    resource isolated function get notifications/[TrelloID id]/card(map<string|string[]> headers = {}, *GetNotificationsIdCardQueries queries) returns inline_response_200_5|error {
         string resourcePath = string `/notifications/${getEncodedUri(id)}/card`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -2015,7 +2016,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function get notifications/[TrelloID id]/list(map<string|string[]> headers = {}, *GetNotificationsIdListQueries queries) returns inline_response_200_5|error {
+    resource isolated function get notifications/[TrelloID id]/list(map<string|string[]> headers = {}, *GetNotificationsIdListQueries queries) returns inline_response_200_6|error {
         string resourcePath = string `/notifications/${getEncodedUri(id)}/list`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -2030,7 +2031,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function get notifications/[TrelloID id]/member(map<string|string[]> headers = {}, *NotificationsidmemberQueries queries) returns inline_response_200_1|error {
+    resource isolated function get notifications/[TrelloID id]/member(map<string|string[]> headers = {}, *NotificationsidmemberQueries queries) returns inline_response_200_2|error {
         string resourcePath = string `/notifications/${getEncodedUri(id)}/member`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -2045,7 +2046,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function get notifications/[TrelloID id]/memberCreator(map<string|string[]> headers = {}, *GetNotificationsIdMembercreatorQueries queries) returns inline_response_200_1|error {
+    resource isolated function get notifications/[TrelloID id]/memberCreator(map<string|string[]> headers = {}, *GetNotificationsIdMembercreatorQueries queries) returns inline_response_200_2|error {
         string resourcePath = string `/notifications/${getEncodedUri(id)}/memberCreator`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -2060,7 +2061,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function get notifications/[TrelloID id]/organization(map<string|string[]> headers = {}, *GetNotificationsIdOrganizationQueries queries) returns inline_response_200_6|error {
+    resource isolated function get notifications/[TrelloID id]/organization(map<string|string[]> headers = {}, *GetNotificationsIdOrganizationQueries queries) returns inline_response_200_7|error {
         string resourcePath = string `/notifications/${getEncodedUri(id)}/organization`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -2177,7 +2178,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function get organizations/[TrelloID id]/memberships/[TrelloID idMembership](map<string|string[]> headers = {}, *GetOrganizationsIdMembershipsIdmembershipQueries queries) returns inline_response_200_7|error {
+    resource isolated function get organizations/[TrelloID id]/memberships/[TrelloID idMembership](map<string|string[]> headers = {}, *GetOrganizationsIdMembershipsIdmembershipQueries queries) returns inline_response_200_8|error {
         string resourcePath = string `/organizations/${getEncodedUri(id)}/memberships/${getEncodedUri(idMembership)}`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -2369,7 +2370,7 @@ public isolated client class Client {
     # + idAction - The ID of the action
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    resource isolated function post actions/[TrelloID idAction]/reactions(idAction_reactions_body payload, map<string|string[]> headers = {}) returns error? {
+    resource isolated function post actions/[TrelloID idAction]/reactions(idAction_reactions_body payload, map<string|string[]> headers = {}) returns inline_response_200|error {
         string resourcePath = string `/actions/${getEncodedUri(idAction)}/reactions`;
         map<anydata> queryParam = {};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -2397,7 +2398,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    # 
+    #
     # # Deprecated
     @deprecated
     resource isolated function post boards/[TrelloID id]/boardPlugins(map<string|string[]> headers = {}, *PostBoardsIdBoardpluginsQueries queries) returns error? {
@@ -2939,7 +2940,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function post notifications/all/read(map<string|string[]> headers = {}, *PostNotificationsAllReadQueries queries) returns inline_response_200_2|error {
+    resource isolated function post notifications/all/read(map<string|string[]> headers = {}, *PostNotificationsAllReadQueries queries) returns inline_response_200_3|error {
         string resourcePath = string `/notifications/all/read`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -2955,7 +2956,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function post organizations(map<string|string[]> headers = {}, *PostOrganizationsQueries queries) returns inline_response_200_6|error {
+    resource isolated function post organizations(map<string|string[]> headers = {}, *PostOrganizationsQueries queries) returns inline_response_200_7|error {
         string resourcePath = string `/organizations`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -2987,7 +2988,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function post organizations/[TrelloID id]/logo(map<string|string[]> headers = {}, *PostOrganizationsIdLogoQueries queries) returns inline_response_200_6|error {
+    resource isolated function post organizations/[TrelloID id]/logo(map<string|string[]> headers = {}, *PostOrganizationsIdLogoQueries queries) returns inline_response_200_7|error {
         string resourcePath = string `/organizations/${getEncodedUri(id)}/logo`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -3002,7 +3003,7 @@ public isolated client class Client {
     # + id - The ID or name of the Organization
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    resource isolated function post organizations/[id_6 id]/tags(map<string|string[]> headers = {}) returns inline_response_200_8|error {
+    resource isolated function post organizations/[id_6 id]/tags(map<string|string[]> headers = {}) returns inline_response_200_9|error {
         string resourcePath = string `/organizations/${getEncodedUri(id)}/tags`;
         map<anydata> queryParam = {};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -3609,7 +3610,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function put members/[TrelloID id](map<string|string[]> headers = {}, *PutMembersIdQueries queries) returns inline_response_200_1|error {
+    resource isolated function put members/[TrelloID id](map<string|string[]> headers = {}, *PutMembersIdQueries queries) returns inline_response_200_2|error {
         string resourcePath = string `/members/${getEncodedUri(id)}`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -3746,7 +3747,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function put notifications/[TrelloID id](map<string|string[]> headers = {}, *PutNotificationsIdQueries queries) returns inline_response_200_2|error {
+    resource isolated function put notifications/[TrelloID id](map<string|string[]> headers = {}, *PutNotificationsIdQueries queries) returns inline_response_200_3|error {
         string resourcePath = string `/notifications/${getEncodedUri(id)}`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -3762,7 +3763,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function put notifications/[TrelloID id]/unread(map<string|string[]> headers = {}, *PutNotificationsIdUnreadQueries queries) returns inline_response_200_2|error {
+    resource isolated function put notifications/[TrelloID id]/unread(map<string|string[]> headers = {}, *PutNotificationsIdUnreadQueries queries) returns inline_response_200_3|error {
         string resourcePath = string `/notifications/${getEncodedUri(id)}/unread`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;
@@ -3828,7 +3829,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    resource isolated function put organizations/[TrelloID id]/members/[idMember idMember](map<string|string[]> headers = {}, *PutOrganizationsIdMembersIdmemberQueries queries) returns inline_response_200_1|error {
+    resource isolated function put organizations/[TrelloID id]/members/[idMember idMember](map<string|string[]> headers = {}, *PutOrganizationsIdMembersIdmemberQueries queries) returns inline_response_200_2|error {
         string resourcePath = string `/organizations/${getEncodedUri(id)}/members/${getEncodedUri(idMember)}`;
         map<anydata> queryParam = {...queries};
         queryParam["key"] = self.apiKeyConfig.'key;

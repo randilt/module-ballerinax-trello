@@ -479,7 +479,7 @@
             "properties": { "emoji": { "type": "object" } }
           },
           "due": { "type": "string", "format": "date", "nullable": true },
-          "dueReminder": { "type": "string", "nullable": true },
+          "dueReminder": { "type": "integer", "nullable": true },
           "idBoard": {
             "type": "string",
             "$ref": "#/components/schemas/TrelloID",
@@ -519,13 +519,15 @@
           "idShort": { "type": "integer" },
           "idAttachmentCover": {
             "type": "string",
-            "$ref": "#/components/schemas/TrelloID",
             "example": "5abbe4b7ddc1b351ef961415",
             "nullable": true
           },
           "labels": {
             "type": "array",
-            "items": { "oneOf": [{ "$ref": "#/components/schemas/TrelloID" }] }
+            "items": {
+              "type": "string",
+              "$ref": "#/components/schemas/TrelloID"
+            }
           },
           "limits": { "type": "object", "$ref": "#/components/schemas/Limits" },
           "locationName": { "type": "string", "nullable": true },
@@ -538,7 +540,11 @@
             "format": "url",
             "example": "https://trello.com/c/H0TZyzbK"
           },
-          "subscribed": { "type": "boolean", "example": false },
+          "subscribed": {
+            "type": "boolean",
+            "example": false,
+            "nullable": false
+          },
           "url": {
             "type": "string",
             "format": "url",
@@ -549,7 +555,6 @@
             "properties": {
               "idAttachment": {
                 "type": "string",
-                "$ref": "#/components/schemas/TrelloID",
                 "nullable": true
               },
               "color": {
@@ -1629,41 +1634,7 @@
       },
       "Prefs": {
         "type": "object",
-        "properties": {
-          "permissionLevel": {
-            "type": "string",
-            "enum": ["org", "board", "public"]
-          },
-          "hideVotes": { "type": "boolean" },
-          "voting": { "type": "string", "enum": ["disabled", "enabled"] },
-          "comments": { "type": "string" },
-          "invitations": { "enum": ["admins", "members"] },
-          "selfJoin": { "type": "boolean" },
-          "cardCovers": { "type": "boolean" },
-          "isTemplate": { "type": "boolean" },
-          "cardAging": { "$ref": "#/components/schemas/CardAging" },
-          "calendarFeedEnabled": { "type": "boolean" },
-          "background": { "$ref": "#/components/schemas/TrelloID" },
-          "backgroundImage": {
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          },
-          "backgroundImageScaled": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/ImageDescriptor" },
-            "nullable": true
-          },
-          "backgroundTile": { "type": "boolean" },
-          "backgroundBrightness": { "type": "string", "example": "dark" },
-          "backgroundBottomColor": { "type": "string", "example": "#1e2e00" },
-          "backgroundTopColor": { "type": "string", "example": "#ffffff" },
-          "canBePublic": { "type": "boolean" },
-          "canBeEnterprise": { "type": "boolean" },
-          "canBeOrg": { "type": "boolean" },
-          "canBePrivate": { "type": "boolean" },
-          "canInvite": { "type": "boolean" }
-        }
+        "additionalProperties": true
       },
       "SavedSearch": {
         "type": "object",
@@ -1928,7 +1899,16 @@
           }
         ],
         "deprecated": false,
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Action" }
+              }
+            }
+          }
+        }
       },
       "put": {
         "tags": [],
@@ -2309,7 +2289,25 @@
           }
         },
         "deprecated": false,
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "$ref": "#/components/schemas/TrelloID" },
+                    "idMember": { "$ref": "#/components/schemas/TrelloID" },
+                    "idAction": { "$ref": "#/components/schemas/TrelloID" },
+                    "emoji": { "type": "string" },
+                    "member": { "$ref": "#/components/schemas/Member" }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/actions/{idAction}/reactions/{id}": {
@@ -2378,7 +2376,19 @@
           }
         ],
         "deprecated": false,
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/applications/{key}/compliance": {
